@@ -11,7 +11,8 @@ COPY ./app /usr/src/app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Download NLTK data
-RUN python -m nltk.downloader vader_lexicon
+ENV NLTK_DATA /usr/local/share/nltk_data
+RUN python -m nltk.downloader -d $NLTK_DATA vader_lexicon
 
 # Make port 80 available to the world outside this container
 EXPOSE 8080
