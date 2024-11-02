@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.12-alpine
+FROM python:3.13-alpine
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -8,7 +8,9 @@ WORKDIR /usr/src/app
 COPY ./app /usr/src/app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apk update && apk upgrade --no-cache && \
+  pip install --no-cache-dir -r requirements.txt && \
+  rm -rf /var/cache/apk/*
 
 # Download NLTK data
 ENV NLTK_DATA /usr/local/share/nltk_data
