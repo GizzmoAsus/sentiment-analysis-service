@@ -13,7 +13,7 @@ RUN apk update && apk upgrade --no-cache && \
   rm -rf /var/cache/apk/*
 
 # Download NLTK data
-ENV NLTK_DATA /usr/local/share/nltk_data
+ENV NLTK_DATA=/usr/local/share/nltk_data
 RUN python -m nltk.downloader -d $NLTK_DATA vader_lexicon
 
 # Make port 80 available to the world outside this container
